@@ -4,7 +4,14 @@ using UnityEditor;
 namespace StyloGestures{
 	public class ScriptableAssetGenerator {
 
-		[MenuItem("Stylo Gestures/Create new gesture parameters")]
+		[MenuItem("Assets/Create/Stylo Gestures/Swipe/Create swipe prefab")]
+		public static void CreateSwipePrefab ()
+		{
+			Object prefab = MonoBehaviour.Instantiate(Resources.Load("Prefabs/SwipeGesture"));
+			prefab.name = "SwipeGesture";
+		}
+
+		[MenuItem("Assets/Create/Stylo Gestures/Create new gesture parameters")]
 		public static void CreateAsset ()
 		{
 			GestureParameters asset = ScriptableObject.CreateInstance<GestureParameters>();
@@ -15,7 +22,7 @@ namespace StyloGestures{
 			Selection.activeObject = asset;
 		}
 
-		[MenuItem("Stylo Gestures/Create default gesture parameters")]
+		/*[MenuItem("Stylo Gestures/Create default gesture parameters")]
 		public static void CreateDefaultAsset ()
 		{
 			GestureParameters asset = ScriptableObject.CreateInstance<GestureParameters>();
@@ -24,6 +31,7 @@ namespace StyloGestures{
 			asset.hideFlags = HideFlags.NotEditable;
 			EditorUtility.FocusProjectWindow();
 			Selection.activeObject = asset;
-		}
+		}*/
+
 	}
 }
