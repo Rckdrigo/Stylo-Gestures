@@ -22,16 +22,5 @@ namespace StyloGestures{
 			Selection.activeObject = asset;
 		}
 
-		/*[MenuItem("Stylo Gestures/Create default gesture parameters")]
-		public static void CreateDefaultAsset ()
-		{
-			GestureParameters asset = ScriptableObject.CreateInstance<GestureParameters>();
-			AssetDatabase.CreateAsset(asset, "Assets/StyloGestures/Resources/DefaultSimpleGestureParameters.asset");
-			AssetDatabase.SaveAssets();
-			asset.hideFlags = HideFlags.NotEditable;
-			EditorUtility.FocusProjectWindow();
-			Selection.activeObject = asset;
-		}*/
-
 	}
 }
