@@ -8,7 +8,7 @@ namespace StyloGestures{
 /// Simple, Raw, Normalized, Radian angle, Degree angle
 /// </summary>
 
-	[HelpURL("http://www.google.com")]
+	[HelpURL("https://github.com/Rckdrigo/Stylo-Gestures/wiki/Swipe-Gesture")]
 	public abstract class SwipeGesture : MonoBehaviour {
 
 		#region Public configuration		
@@ -77,11 +77,11 @@ namespace StyloGestures{
 					break;
 
 				case SwipeInformationType.RadianAngle:
-					OnSwipeDetectedRadianAngle(Mathf.Atan2(swipeRawDirectionVector.y,swipeRawDirectionVector.x));
+					OnSwipeDetectedRadian(Mathf.Atan2(swipeRawDirectionVector.y,swipeRawDirectionVector.x));
 					break;
 
 				case SwipeInformationType.DegreeAngle:
-					OnSwipeDetectedDegreeAngle(Mathf.Atan2(swipeRawDirectionVector.y,swipeRawDirectionVector.x)*180f/Mathf.PI);
+					OnSwipeDetectedDegree(Mathf.Atan2(swipeRawDirectionVector.y,swipeRawDirectionVector.x)*180f/Mathf.PI);
 					break;
 
 				case SwipeInformationType.Simple:
@@ -127,12 +127,12 @@ namespace StyloGestures{
 		/// <summary>
 		/// This methods gives you the direction as an angle in radians
 		/// </summary>
-		public virtual void OnSwipeDetectedRadianAngle(float angle){}
+		public virtual void OnSwipeDetectedRadian(float angle){}
 
 		/// <summary>
 		/// This methods gives you the direction as an angle in degrees
 		/// </summary>
-		public virtual void OnSwipeDetectedDegreeAngle(float angle){}
+		public virtual void OnSwipeDetectedDegree(float angle){}
 		#endregion
 	}
 }
