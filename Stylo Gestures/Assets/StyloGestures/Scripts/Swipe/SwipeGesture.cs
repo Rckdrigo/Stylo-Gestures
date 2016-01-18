@@ -7,30 +7,24 @@ namespace StyloGestures{
 /// Swipe gesture. This class automatically detects and calls one of five different methods. 
 /// Simple, Raw, Normalized, Radian angle, Degree angle
 /// </summary>
-
 	[HelpURL("https://github.com/Rckdrigo/Stylo-Gestures/wiki/Swipe-Gesture")]
 	public abstract class SwipeGesture : MonoBehaviour {
 
-		#region Public configuration		
-		[SerializeField] public SwipeInformationType swipeInfoType = SwipeInformationType.Simple;
 		[SerializeField] private GestureParameters gestureParameters;
-		#endregion
 
-		#region Parameters
+		#region Core
 		private bool onMovement = false;
 		private Vector2 initialPosition, finalPosition; 
 		private Vector2 swipeDirectionVector;
 		private Vector2 swipeRawDirectionVector;
-		#endregion
 
-		#region Core
 		public virtual void Start (){
 			Assert.IsNotNull(gestureParameters,"You must use a gesture parameters asset.\nYou can use either the default parameters in Assets/StyloGestures/Resources/DefaultGestureParameters.asset or create a new asset with Stylo Gestures/Create gesture parameters in the option bars.");
 		}
 
 		public virtual void Update () {
 			#if !UNITY_EDITOR
-			if(Input.touchCount > 0){
+			if(Input.touchCount == 1){
 				if(Input.GetTouch(0).phase == TouchPhase.Moved) {
 					if(!onMovement){
 						initialPosition = Input.GetTouch(0).position;
@@ -53,7 +47,7 @@ namespace StyloGestures{
 		}
 
 		private IEnumerator CheckIfGesture(){
-			yield return new WaitForSeconds(gestureParameters.timePrecision);
+			yield return new WaitForSeconds(gestureParameters.swipeTimePrecision);
 		#if UNITY_EDITOR
 			if(Input.GetMouseButton(0))
 				finalPosition = (Vector2)Input.mousePosition;
@@ -61,33 +55,33 @@ namespace StyloGestures{
 			if(Input.touchCount > 0)
 				finalPosition = Input.GetTouch(0).position;
 		#endif
-			if(Vector3.Distance(finalPosition,initialPosition) > gestureParameters.lengthPrecision){
+			if(Vector3.Distance(finalPosition,initialPosition) > gestureParameters.swipeLengthPrecision){
 				Vector2 direction = (finalPosition - initialPosition);
 				swipeRawDirectionVector = direction;
 
-				switch(swipeInfoType){
-				case SwipeInformationType.Raw:
-					OnSwipeDetectedRaw(swipeRawDirectionVector);
-					break;
+				//switch(swipeInfoType){
+				//case SwipeInformationType.RawVector:
+					OnSwipeRawDetected(swipeRawDirectionVector);
+				//	break;
 
-				case SwipeInformationType.Normalized:
+				//case SwipeInformationType.NormalizedVector:
 					swipeDirectionVector = new Vector2(Mathf.Round(Vector2.Dot(direction,Vector2.right)),
 				                                   Mathf.Round(Vector2.Dot(direction,Vector2.up))).normalized;
-					OnSwipeDetectedNormalized(swipeDirectionVector);
-					break;
+					OnSwipeNormalizedDetected(swipeDirectionVector);
+				//	break;
 
-				case SwipeInformationType.RadianAngle:
-					OnSwipeDetectedRadian(Mathf.Atan2(swipeRawDirectionVector.y,swipeRawDirectionVector.x));
-					break;
+				//case SwipeInformationType.RadianAngle:
+					OnSwipeRadianDetected(Mathf.Atan2(swipeRawDirectionVector.y,swipeRawDirectionVector.x),swipeRawDirectionVector.magnitude);
+				//	break;
 
-				case SwipeInformationType.DegreeAngle:
-					OnSwipeDetectedDegree(Mathf.Atan2(swipeRawDirectionVector.y,swipeRawDirectionVector.x)*180f/Mathf.PI);
-					break;
+				//case SwipeInformationType.DegreeAngle:
+					OnSwipeDegreeDetected(Mathf.Atan2(swipeRawDirectionVector.y,swipeRawDirectionVector.x)*180f/Mathf.PI,swipeRawDirectionVector.magnitude);
+				//	break;
 
-				case SwipeInformationType.Simple:
-					OnSwipeDetectedSimple(GetDirection());
-					break;
-				}
+				//case SwipeInformationType.Simple:
+					OnSwipeSimpleDetected(GetDirection());
+				//	break;
+				//}
 
 
 			}
@@ -112,27 +106,27 @@ namespace StyloGestures{
 		/// <summary>
 		/// This methods gives you the direction as a simple enumeration: Up, down, left, right
 		/// </summary>
-		public virtual void OnSwipeDetectedSimple(SwipeDirection direction){}
+		public virtual void OnSwipeSimpleDetected(SwipeDirection direction){}
 
 		/// <summary>
 		/// This methods gives you the direction as a Vector2 with the raw values of (x,y)
 		/// </summary>
-		public virtual void OnSwipeDetectedRaw(Vector2 direction){}
+		public virtual void OnSwipeRawDetected(Vector2 direction){}
 
 		/// <summary>
 		/// This methods gives you the direction as a Vector2 with the normalized values (between [-1,1]) in (x,y)
 		/// </summary>
-		public virtual void OnSwipeDetectedNormalized(Vector2 direction){}
+		public virtual void OnSwipeNormalizedDetected(Vector2 direction){}
 
 		/// <summary>
 		/// This methods gives you the direction as an angle in radians
 		/// </summary>
-		public virtual void OnSwipeDetectedRadian(float angle){}
+		public virtual void OnSwipeRadianDetected(float angle, float radius){}
 
 		/// <summary>
 		/// This methods gives you the direction as an angle in degrees
 		/// </summary>
-		public virtual void OnSwipeDetectedDegree(float angle){}
+		public virtual void OnSwipeDegreeDetected(float angle, float radius){}
 		#endregion
 	}
 }
