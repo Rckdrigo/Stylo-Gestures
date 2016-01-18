@@ -5,10 +5,12 @@ namespace StyloGestures{
 	[Serializable]
 	public class GestureParameters : ScriptableObject {
 
-		[Header("Swipe Gestures")]
+		[Header("Tap Gestures")]
+		[Range(0.00f,0.2f)] public float tapDeltaTime = 0.15f;
 
-		[Range(0.00f,0.2f)] public float timePrecision = 0.045f;
-		[Range(0,200)] public float lengthPrecision = 50f;
+		[Header("Swipe Gestures")]
+		[Range(0.00f,0.2f)] public float swipeTimePrecision = 0.045f;
+		[Range(0,200)] public float swipeLengthPrecision = 50f;
 
 	}
 }
