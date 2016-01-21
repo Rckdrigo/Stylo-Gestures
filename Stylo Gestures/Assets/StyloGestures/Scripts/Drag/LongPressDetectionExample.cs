@@ -3,7 +3,7 @@ using System.Collections;
 
 namespace StyloGestures{
 
-	public class LongPressDetectionExample : DragGesture {
+	public class LongPressDetectionExample : LongPressGesture {
 
 		public override void OnLongPressDetected (Vector2 screenPosition)
 		{

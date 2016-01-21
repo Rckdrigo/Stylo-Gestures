@@ -1,8 +1,11 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
-using UnityEngine.Assertions;
 
 namespace StyloGestures{
+
+	[Serializable] public enum SwipeDirection{Left,Right,Up,Down,NULL}
+
 /// <summary>
 /// Swipe gesture. This class automatically detects and calls one of five different methods. 
 /// Simple, Raw, Normalized, Radian angle, Degree angle
@@ -10,17 +13,14 @@ namespace StyloGestures{
 	[HelpURL("https://github.com/Rckdrigo/Stylo-Gestures/wiki/Swipe-Gesture")]
 	public abstract class SwipeGesture : MonoBehaviour {
 
-		[SerializeField] private GestureParameters gestureParameters;
-
+		[Range(0.00f,0.2f)] public float swipeTimePrecision = 0.045f;
+		[Range(0,200)] public float swipeLengthPrecision = 50f;
 		#region Core
 		private bool onMovement = false;
 		private Vector2 initialPosition, finalPosition; 
 		private Vector2 swipeDirectionVector;
 		private Vector2 swipeRawDirectionVector;
 
-		public virtual void Start (){
-			Assert.IsNotNull(gestureParameters,"You must use a gesture parameters asset.\nYou can use either the default parameters in Assets/StyloGestures/Resources/DefaultGestureParameters.asset or create a new asset with Stylo Gestures/Create gesture parameters in the option bars.");
-		}
 
 		public virtual void Update () {
 			#if !UNITY_EDITOR
@@ -47,7 +47,7 @@ namespace StyloGestures{
 		}
 
 		private IEnumerator CheckIfGesture(){
-			yield return new WaitForSeconds(gestureParameters.swipeTimePrecision);
+			yield return new WaitForSeconds(swipeTimePrecision);
 		#if UNITY_EDITOR
 			if(Input.GetMouseButton(0))
 				finalPosition = (Vector2)Input.mousePosition;
@@ -55,33 +55,15 @@ namespace StyloGestures{
 			if(Input.touchCount > 0)
 				finalPosition = Input.GetTouch(0).position;
 		#endif
-			if(Vector3.Distance(finalPosition,initialPosition) > gestureParameters.swipeLengthPrecision){
+			if(Vector3.Distance(finalPosition,initialPosition) > swipeLengthPrecision){
 				Vector2 direction = (finalPosition - initialPosition);
 				swipeRawDirectionVector = direction;
-
-				//switch(swipeInfoType){
-				//case SwipeInformationType.RawVector:
-					OnSwipeRawDetected(swipeRawDirectionVector);
-				//	break;
-
-				//case SwipeInformationType.NormalizedVector:
-					swipeDirectionVector = new Vector2(Mathf.Round(Vector2.Dot(direction,Vector2.right)),
-				                                   Mathf.Round(Vector2.Dot(direction,Vector2.up))).normalized;
-					OnSwipeNormalizedDetected(swipeDirectionVector);
-				//	break;
-
-				//case SwipeInformationType.RadianAngle:
-					OnSwipeRadianDetected(Mathf.Atan2(swipeRawDirectionVector.y,swipeRawDirectionVector.x),swipeRawDirectionVector.magnitude);
-				//	break;
-
-				//case SwipeInformationType.DegreeAngle:
-					OnSwipeDegreeDetected(Mathf.Atan2(swipeRawDirectionVector.y,swipeRawDirectionVector.x)*180f/Mathf.PI,swipeRawDirectionVector.magnitude);
-				//	break;
-
-				//case SwipeInformationType.Simple:
-					OnSwipeSimpleDetected(GetDirection());
-				//	break;
-				//}
+				OnSwipeRawDetected(swipeRawDirectionVector);
+				swipeDirectionVector = new Vector2(Mathf.Round(Vector2.Dot(direction,Vector2.right)),Mathf.Round(Vector2.Dot(direction,Vector2.up))).normalized;
+				OnSwipeNormalizedDetected(swipeDirectionVector);
+				OnSwipeRadianDetected(Mathf.Atan2(swipeRawDirectionVector.y,swipeRawDirectionVector.x),swipeRawDirectionVector.magnitude);
+				OnSwipeDegreeDetected(Mathf.Atan2(swipeRawDirectionVector.y,swipeRawDirectionVector.x)*180f/Mathf.PI,swipeRawDirectionVector.magnitude);
+				OnSwipeSimpleDetected(GetDirection());
 
 
 			}
