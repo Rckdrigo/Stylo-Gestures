@@ -12,7 +12,7 @@ namespace StyloGestures{
 		private Vector2 lastPosition,actualPosition;
 		private float timeDragging;
 
-		public virtual void Update () {
+		public virtual void FixedUpdate () {
 			#if UNITY_EDITOR
 			if(Input.GetMouseButton(0)){
 				dragging = true;

@@ -1,13 +1,20 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 namespace StyloGestures{
 
 	public class SingleTapDetectionExample : TapGesture {
 
-		public override void SingleTapDetected ()
+		Text exampleLabel;
+
+		void Start(){
+			exampleLabel = GameObject.Find("ExampleText").GetComponent<Text>();
+		}
+
+		public override void OnSingleTapDetected ()
 		{ 
-			Debug.Log("Simple tap!");
+			exampleLabel.text = "Simple tap!";
 		}
 
 	}

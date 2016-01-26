@@ -22,7 +22,7 @@ namespace StyloGestures{
 		private Vector2 swipeRawDirectionVector;
 
 
-		public virtual void Update () {
+		public virtual void FixedUpdate () {
 			#if !UNITY_EDITOR
 			if(Input.touchCount == 1){
 				if(Input.GetTouch(0).phase == TouchPhase.Moved) {

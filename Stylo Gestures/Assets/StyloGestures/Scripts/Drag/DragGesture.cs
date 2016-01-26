@@ -11,14 +11,13 @@ namespace StyloGestures{
 		private bool dragging;
 		private Vector2 lastPosition,actualPosition;
 
-		public virtual void Update () {
+		public virtual void FixedUpdate () {
 			#if UNITY_EDITOR
 			if(Input.GetMouseButton(0)){
 				dragging = true;
 				actualPosition = Input.mousePosition;
 				if(lastPosition!=null){
-					if(lastPosition != actualPosition)
-						OnDraggingDetected(actualPosition,(actualPosition-lastPosition).normalized);
+						OnDragDetected(actualPosition,(actualPosition-lastPosition).normalized);
 				}
 			}else if(!Input.GetMouseButton(0)){
 				dragging = false;
@@ -27,7 +26,7 @@ namespace StyloGestures{
 			if(Input.touchCount == 1){
 				dragging = true;
 				actualPosition = Input.GetTouch(0).position;
-				if(Input.GetTouch(0).phase == TouchPhase.Moved){
+				if(Input.GetTouch(0).phase == TouchPhase.Moved || Input.GetTouch(0).phase == TouchPhase.Stationary){
 					if(lastPosition!=null)
 						OnDraggingDetected(actualPosition,(actualPosition-lastPosition).normalized);
 				}
@@ -45,7 +44,7 @@ namespace StyloGestures{
 		#endregion
 
 		#region Public Methods
-		public virtual void OnDraggingDetected(Vector2 screenPosition, Vector2 direction){}
+		public virtual void OnDragDetected(Vector2 screenPosition, Vector2 direction){}
 		#endregion
 	}
 }

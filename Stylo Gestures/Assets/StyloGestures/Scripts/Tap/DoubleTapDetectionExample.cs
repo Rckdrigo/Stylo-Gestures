@@ -1,13 +1,20 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 namespace StyloGestures{
 
 	public class DoubleTapDetectionExample : DoubleTapGesture {
 
-		public override void DoubleTapDetected ()
+		Text exampleLabel;
+
+		void Start(){
+			exampleLabel = GameObject.Find("ExampleText").GetComponent<Text>();
+		}
+
+		public override void OnDoubleTapDetected ()
 		{
-			Debug.Log("Double Tap!");
+			exampleLabel.text = "Double Tap!";
 		}
 	}
 }

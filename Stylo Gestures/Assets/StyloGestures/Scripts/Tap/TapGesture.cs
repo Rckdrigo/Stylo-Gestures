@@ -13,7 +13,7 @@ namespace StyloGestures{
 		private bool tapped;
 		private int tapCount = 0;
 
-		public virtual void Update () {
+		public virtual void FixedUpdate () {
 			#if !UNITY_EDITOR
 			if(Input.touchCount == 1){
 				if(Input.GetTouch(0).phase == TouchPhase.Began){
@@ -41,7 +41,7 @@ namespace StyloGestures{
 			#endif
 			{
 				if(tapCount == 1)
-					SingleTapDetected();
+					OnSingleTapDetected();
 			}
 			tapCount = 0;
 		}
@@ -49,7 +49,7 @@ namespace StyloGestures{
 		#endregion
 
 		#region Public Methods
-		public virtual void SingleTapDetected(){}
+		public virtual void OnSingleTapDetected(){}
 		#endregion
 	}
 
