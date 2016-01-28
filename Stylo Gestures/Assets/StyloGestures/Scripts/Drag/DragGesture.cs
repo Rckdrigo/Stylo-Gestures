@@ -6,7 +6,7 @@ namespace StyloGestures
 {
 
 	[HelpURL("https://github.com/Rckdrigo/Stylo-Gestures/wiki/Drag-Gesture")]
-	public class DragGesture : Gesture
+	public abstract class DragGesture : Gesture
 	{
 
 		#region Core

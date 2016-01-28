@@ -4,6 +4,7 @@ using System;
 
 namespace StyloGestures
 {
+
 	[HelpURL("https://github.com/Rckdrigo/Stylo-Gestures/wiki/Double-Tap-Gesture")]
 	public abstract class DoubleTapGesture : MonoBehaviour
 	{

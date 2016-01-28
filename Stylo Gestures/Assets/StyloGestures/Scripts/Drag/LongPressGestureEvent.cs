@@ -4,6 +4,7 @@ using System.Collections;
 
 namespace StyloGestures
 {
+	[HelpURL("https://github.com/Rckdrigo/Stylo-Gestures/wiki/Long-Press-Gesture#unity-events")]
 	[AddComponentMenu("Stylo Gestures/Long Press Gesture Event")]
 	public class LongPressGestureEvent : MonoBehaviour
 	{
