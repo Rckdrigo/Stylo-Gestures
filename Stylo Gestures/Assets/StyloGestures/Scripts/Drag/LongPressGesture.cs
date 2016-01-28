@@ -6,11 +6,7 @@ namespace StyloGestures
 {
 
 	[HelpURL("https://github.com/Rckdrigo/Stylo-Gestures/wiki/Long-Press-Gesture")]
-<<<<<<< Updated upstream
 	public abstract class LongPressGesture : Gesture
-=======
-	public class LongPressGesture : Gesture
->>>>>>> Stashed changes
 	{
 
 		#region Core

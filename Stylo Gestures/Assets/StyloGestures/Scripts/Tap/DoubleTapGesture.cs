@@ -4,7 +4,6 @@ using System;
 
 namespace StyloGestures
 {
-<<<<<<< Updated upstream
 
 	[HelpURL("https://github.com/Rckdrigo/Stylo-Gestures/wiki/Double-Tap-Gesture")]
 	public abstract class DoubleTapGesture : MonoBehaviour
@@ -17,19 +16,6 @@ namespace StyloGestures
 
 		public static event OnGestureEvent OnDoubleTapEvent;
 
-=======
-	[HelpURL("https://github.com/Rckdrigo/Stylo-Gestures/wiki/Double-Tap-Gesture")]
-	public abstract class DoubleTapGesture : MonoBehaviour
-	{
-		[Range(0.00f, 0.3f)] public float timeGap = 0.25f;
-
-		#region Core
-
-		public delegate void OnGestureEvent();
-
-		public static event OnGestureEvent OnDoubleTapEvent;
-
->>>>>>> Stashed changes
 		private bool tapped;
 		private int tapCount = 0;
 
