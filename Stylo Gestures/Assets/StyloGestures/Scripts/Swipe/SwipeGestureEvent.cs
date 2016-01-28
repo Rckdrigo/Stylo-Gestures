@@ -5,6 +5,7 @@ using System.Collections;
 namespace StyloGestures
 {
 	[HelpURL("https://github.com/Rckdrigo/Stylo-Gestures/wiki/Swipe-Gesture#unity-events")]
+
 	[AddComponentMenu("Stylo Gestures/Swipe Gesture Event")]
 	public class SwipeGestureEvent : MonoBehaviour
 	{

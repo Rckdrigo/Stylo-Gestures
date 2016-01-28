@@ -16,6 +16,7 @@ namespace StyloGestures
 
 		public static event OnGestureEvent OnDoubleTapEvent;
 
+
 		private bool tapped;
 		private int tapCount = 0;
 

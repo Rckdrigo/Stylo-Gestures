@@ -5,6 +5,7 @@ using System.Collections;
 namespace StyloGestures
 {
 	[HelpURL("https://github.com/Rckdrigo/Stylo-Gestures/wiki/Drag-Gesture#unity-events")]
+
 	[AddComponentMenu("Stylo Gestures/Drag Gesture Event")]
 	public class DragGestureEvent : MonoBehaviour
 	{
