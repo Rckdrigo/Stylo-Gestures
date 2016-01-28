@@ -4,10 +4,8 @@ using System.Collections;
 
 namespace StyloGestures
 {
-<<<<<<< Updated upstream
 	[HelpURL("https://github.com/Rckdrigo/Stylo-Gestures/wiki/Swipe-Gesture#unity-events")]
-=======
->>>>>>> Stashed changes
+
 	[AddComponentMenu("Stylo Gestures/Swipe Gesture Event")]
 	public class SwipeGestureEvent : MonoBehaviour
 	{

@@ -6,11 +6,7 @@ namespace StyloGestures
 {
 
 	[HelpURL("https://github.com/Rckdrigo/Stylo-Gestures/wiki/Drag-Gesture")]
-<<<<<<< Updated upstream
 	public abstract class DragGesture : Gesture
-=======
-	public class DragGesture : Gesture
->>>>>>> Stashed changes
 	{
 
 		#region Core
